@@ -1,0 +1,9 @@
+name: User
+
+db: test
+
+table: user
+
+field:
+  id: ID
+  name: STRING

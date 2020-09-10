@@ -1,0 +1,11 @@
+name: Number
+
+db: test
+
+table: number
+
+field:
+  id: ID
+  number: INTEGER
+
+

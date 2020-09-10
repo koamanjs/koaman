@@ -1,0 +1,56 @@
+{
+  "name": "koaman",
+  "version": "4.2.1",
+  "description": "基于 Koa 的上层框架，以最简单的方式配置复杂的模块服务应用程序",
+  "main": "index.js",
+  "scripts": {
+    "test": "cd test && cross-env NODE_ENV=test node .",
+    "testcase": "cd test && cross-env NODE_ENV=test mocha test --exit"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/koamanjs/koaman.git"
+  },
+  "author": "lijialiang@yy.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/koamanjs/koaman/issues"
+  },
+  "homepage": "https://github.com/koamanjs/koaman#readme",
+  "dependencies": {
+    "@koa/cors": "^3.0.0",
+    "@koa/multer": "^2.0.2",
+    "chalk": "^4.0.0",
+    "cross-env": "^5.2.0",
+    "dayjs": "^1.8.27",
+    "del": "^5.1.0",
+    "execa": "^2.1.0",
+    "glob": "^7.1.4",
+    "ioredis": "^4.16.3",
+    "js-yaml": "^3.14.0",
+    "koa": "^2.7.0",
+    "koa-body": "^4.1.1",
+    "koa-router": "^7.4.0",
+    "koa-sslify": "^4.0.3",
+    "log4js": "^5.0.0",
+    "multer": "^1.4.2",
+    "mysql2": "^1.6.5",
+    "sequelize": "^5.14.0",
+    "shortid": "^2.2.14",
+    "socket.io": "^2.2.0"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "eslint": "^6.8.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.1.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "mocha": "^6.2.0",
+    "supertest": "^4.0.2"
+  },
+  "bin": {
+    "koaman": "./cli.js"
+  }
+}

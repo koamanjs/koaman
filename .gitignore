@@ -1,0 +1,5 @@
+node_modules
+logs
+*.jpg
+*.png
+config.redis.js
