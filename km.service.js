@@ -19,8 +19,7 @@ Koa.prototype.service = function (filesName = 'km.service.*') {
       service[ServiceClass.name] = ServiceEntity
     } else if (ServiceClass.name && typeof ServiceClass === 'function') {
       // service function
-      ServiceClass.ctx = this.context
-      service[ServiceClass.name] = ServiceClass
+      service[ServiceClass.name] = ServiceClass.bind({ ctx: this.context })
     }
   }
 
