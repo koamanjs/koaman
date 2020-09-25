@@ -49,7 +49,10 @@ Koa.prototype.router = function (filesName = 'km.router.*') {
   routerMap = JSON.parse(JSON.stringify(router.stack))
   udpRouterMap.forEach(item => routerMap.push({ path: item.action, methods: 'UDP' }))
 
-  this.use(koaBody({ includeUnparsed: true }))
+  this.use(koaBody({
+    includeUnparsed: true,
+    strict: false
+  }))
   this.use(router.routes())
   this.use(router.allowedMethods())
 
