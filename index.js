@@ -201,13 +201,15 @@ Koa.prototype.start = function (port = process.env.PORT, callback) {
 
       // 其他 udp 服务连接
       const udpClientServes = this.context.udpClientServes
-      let udpClientServesArray = udpClientServes
-      if (!Array.isArray(udpClientServesArray)) {
-        udpClientServesArray = [udpClientServesArray]
+      if (udpClientServes) {
+        let udpClientServesArray = udpClientServes
+        if (!Array.isArray(udpClientServesArray)) {
+          udpClientServesArray = [udpClientServesArray]
+        }
+        udpClientServesArray.forEach(serve => {
+          console.log(`   ${serve.name || serve.ip || 'local'} (${serve.port})`)
+        })
       }
-      udpClientServesArray.forEach(serve => {
-        console.log(`   ${serve.name || serve.ip || 'local'} (${serve.port})`)
-      })
 
       console.log()
     }
