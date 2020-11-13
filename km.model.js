@@ -88,6 +88,13 @@ Koa.prototype.model = function (filesName = 'km.model.*') {
                 autoIncrement: true
               }
               break
+            case 'ID_STRING':
+              field[keyHump] = {
+                field: key,
+                type: Sequelize.STRING,
+                primaryKey: true
+              }
+              break
             case 'JSONARRAY':
               field[keyHump] = {
                 field: key,
