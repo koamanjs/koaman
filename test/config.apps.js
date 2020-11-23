@@ -4,7 +4,7 @@ const DB = [
     db: 'test',
     host: 'legox.yy.com',
     account: 'yyued',
-    password: 'yyued123',
+    password: 'yyued123'
     // logging: true
   },
   {
