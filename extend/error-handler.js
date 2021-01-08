@@ -1,5 +1,5 @@
 const Koa = require('koa')
-class KmError extends Error {}
+class KMError extends Error {}
 
 Koa.prototype.errorHandler = function () {
   this.context.error = (code, message) => {
@@ -8,16 +8,16 @@ Koa.prototype.errorHandler = function () {
       message = code
       code = DEFAULT_ERROR_STAUTS_CODE
     }
-    const error = new KmError()
+    const error = new KMError()
     error.code = code || DEFAULT_ERROR_STAUTS_CODE
-    error.message = message || 'KmError'
+    error.message = message || 'KMError'
     return error
   }
 
   this.use((ctx, next) => {
     return next().catch(error => {
       // 捕获已知抛出错误
-      if (error instanceof KmError) {
+      if (error instanceof KMError) {
         ctx.throw(error.code, error.message)
       }
 
