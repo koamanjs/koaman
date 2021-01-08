@@ -28,7 +28,7 @@ module.exports = function ({ router, controller, upload }) {
     try {
       ctx.body = await ctx.udp['test/udp/correct']({ id: 340 })
     } catch (error) {
-      ctx.body = error
+      console.error('error', error)
     }
   })
   router.get('/udp/error', async ctx => {
