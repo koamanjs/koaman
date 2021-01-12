@@ -4,7 +4,7 @@ require('./extend/cors')
 require('./extend/upload')
 require('./extend/redis')
 require('./extend/error-handler')
-require('./extend/udp')
+require('./extend/udp-serve')
 
 const chalk = require('chalk')
 const Koa = require('koa')
@@ -17,11 +17,11 @@ require('./km.service')
 /**
  * udp server
  */
-let udpServerPort
-let udpServerHost
-Koa.prototype.udpServer = function (port, host) {
-  udpServerPort = port
-  udpServerHost = host
+let udpServicePort
+let udpServiceHost
+Koa.prototype.udpService = function (port, host) {
+  udpServicePort = port
+  udpServiceHost = host
   return this
 }
 
@@ -126,7 +126,7 @@ Koa.prototype.start = function (port = process.env.PORT, callback) {
   server.listen(port, callback)
 
   // udp 服务监听处理
-  if (udpServerPort) {
+  if (udpServicePort) {
     const udpServer = require('dgram').createSocket('udp4')
 
     udpServer.on('message', async (message, remote) => {
@@ -177,7 +177,7 @@ Koa.prototype.start = function (port = process.env.PORT, callback) {
       }
     })
 
-    udpServer.bind(udpServerPort, udpServerHost)
+    udpServer.bind(udpServicePort, udpServiceHost)
   }
 
   // 非 PM2 启动打印输出信息
@@ -193,12 +193,12 @@ Koa.prototype.start = function (port = process.env.PORT, callback) {
     console.log(`   host: ${chalk.underline(`http://${require('./common/get-ip')()}:${port}`)}`)
     console.log()
 
-    if (udpServerPort || this.context.udpClientServes) {
+    if (udpServicePort || this.context.udpClientServes) {
       console.log(chalk.blue.bold(' UdpServe'))
 
       // 自身 udp 服务
-      if (udpServerPort) {
-        console.log(chalk.yellowBright(`   ${udpServerHost || 'self'} (${udpServerPort})`))
+      if (udpServicePort) {
+        console.log(chalk.yellowBright(`   ${udpServiceHost || 'self'} (${udpServicePort})`))
       }
 
       // 其他 udp 服务连接

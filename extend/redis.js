@@ -1,6 +1,12 @@
 const Koa = require('koa')
 
-Koa.prototype.redis = function ({ config, name }) {
+Koa.prototype.redis = function (optConfig) {
+  const { config, name } = (() => {
+    if (typeof optConfig === 'undefined' && process.env.REDIS) return JSON.parse(process.env.REDIS)
+    if (typeof optConfig === 'string') return JSON.parse(optConfig)
+    return optConfig
+  })()
+
   const Redis = require('ioredis')
 
   if (!config && !name) {

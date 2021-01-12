@@ -1,6 +1,12 @@
 const Koa = require('koa')
 
-Koa.prototype.udp = function (serves) {
+Koa.prototype.udpServe = function (optConfig) {
+  const serves = (() => {
+    if (typeof optConfig === 'undefined' && process.env.UDP_SERVE) return JSON.parse(process.env.UDP_SERVE)
+    if (typeof optConfig === 'string') return JSON.parse(optConfig)
+    return optConfig
+  })()
+
   const udpClient = require('dgram').createSocket('udp4')
   const callback = {}
   const error = {}
