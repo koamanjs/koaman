@@ -19,7 +19,7 @@ require('./km.service')
  */
 let udpServicePort
 let udpServiceHost
-Koa.prototype.udpService = function (port, host) {
+Koa.prototype.udpService = function (port = process.env.UDP_PORT, host) {
   udpServicePort = port
   udpServiceHost = host
   return this
