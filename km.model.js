@@ -58,7 +58,7 @@ Koa.prototype.model = function (filesName = 'km.model.*') {
     if (basename.indexOf('.yml') > 0) {
       // Yaml model
       const yaml = require('js-yaml')
-      let config = yaml.safeLoad(fs.readFileSync(file, 'utf8'))
+      let config = yaml.load(fs.readFileSync(file, 'utf8'))
       const field = {}
 
       if (config.extend) {
@@ -70,7 +70,7 @@ Koa.prototype.model = function (filesName = 'km.model.*') {
         if (extendYamls.length !== 1) {
           throw Error(`ModelYaml(${config.name}) extend error`)
         }
-        const extendConfig = yaml.safeLoad(fs.readFileSync(extendYamls[0], 'utf8'))
+        const extendConfig = yaml.load(fs.readFileSync(extendYamls[0], 'utf8'))
         config = Object.assign(extendConfig, config)
       }
 

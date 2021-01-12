@@ -50,4 +50,11 @@ module.exports = function ({ router, controller, upload }) {
   })
 
   router.get('/number', controller.Home.number)
+
+  router.get('/params/:id', ctx => {
+    console.log(ctx.params)
+    console.log(ctx.request.params)
+    console.log(ctx.request.query)
+    console.log(ctx.request.body)
+  })
 }

@@ -51,7 +51,9 @@ Koa.prototype.router = function (filesName = 'km.router.*') {
 
   this.use(koaBody({
     includeUnparsed: true,
-    parsedMethods: false
+    parsedMethods: [
+      'GET', 'HEAD', 'DELETE', 'POST', 'PUT', 'PATCH'
+    ]
   }))
   this.use(router.routes())
   this.use(router.allowedMethods())
