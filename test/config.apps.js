@@ -1,3 +1,5 @@
+const apps = require('../apps')
+
 const DB = [
   {
     name: 'test',
@@ -16,23 +18,31 @@ const DB = [
   }
 ]
 
-module.exports = {
-  apps: [
-    {
-      name: 'test',
-      env: {
-        NODE_ENV: 'test',
-        DB: JSON.stringify(DB),
-        PORT: 3000
-      }
-    },
-    {
-      name: 'production',
-      env: {
-        NODE_ENV: 'production',
-        DB: JSON.stringify(DB),
-        PORT: 3001
-      }
+module.exports = apps([
+  {
+    alias: 'kmdemo',
+    env: {
+      NODE_ENV: 'test',
+      DB,
+      XX: [],
+      YY: () => {
+        console.log(123)
+        return 123
+      },
+      PORT: 3000
     }
-  ]
-}
+  },
+  {
+    alias: 'kmdemo',
+    env: {
+      NODE_ENV: 'production',
+      DB,
+      XX: [],
+      YY: () => {
+        console.log(123)
+        return 123
+      },
+      PORT: 3001
+    }
+  }
+])
