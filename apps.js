@@ -10,8 +10,8 @@ module.exports = options => {
   const apps = []
 
   for (const item of options) {
-    if (!item.script && packageJson && packageJson.script) {
-      item.script = packageJson.script
+    if (!item.script && packageJson && packageJson.main) {
+      item.script = packageJson.main
     }
 
     if (item.env) {
