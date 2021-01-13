@@ -66,6 +66,7 @@ Koa.prototype.model = function (filesName = 'km.model.*') {
           if (path.basename(file) === `km.model.${config.extend}.yml`) {
             return file
           }
+          return null
         })
         if (extendYamls.length !== 1) {
           throw Error(`ModelYaml(${config.name}) extend error`)

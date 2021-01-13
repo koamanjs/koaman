@@ -1,5 +1,6 @@
 name: User1
 
+# 继承 km.model.$extend.yml 配置
 extend: user
 
 db: test1

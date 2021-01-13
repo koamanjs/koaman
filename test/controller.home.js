@@ -1,3 +1,4 @@
+// controller class
 class Home {
   async index (ctx) {
     ctx.logger.trace('controller Home-index')

@@ -1,3 +1,4 @@
+// controller function
 function test (ctx) {
   ctx.body = 'ttttttt'
 }
