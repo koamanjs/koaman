@@ -12,9 +12,34 @@ Koa.prototype.udpServe = function (optConfig) {
   const error = {}
   const timer = {}
   const timeout = 10 * 1000
+  const times = {}
 
   udpClient.on('message', async msg => {
-    const msgJson = JSON.parse(msg.toString())
+    let msgStr = msg.toString()
+
+    // 组合多次回传数据
+    const HFlag = '-#kmut#S#-'
+    const EFlag = '-#kmut#E#-'
+    if (msgStr.indexOf(HFlag) >= 0) {
+      const info = msgStr.split(HFlag)
+      const header = info[0]
+      const content = info[1]
+
+      if (!times[header]) {
+        times[header] = ''
+      }
+
+      if (content.indexOf(EFlag) < 0) {
+        times[header] += content
+        return
+      }
+
+      times[header] += content.split(EFlag)[0]
+      msgStr = times[header]
+      delete times[header]
+    }
+
+    const msgJson = JSON.parse(msgStr)
     const uuid = msgJson.uuid
 
     if (msgJson.type !== 'response') { return }

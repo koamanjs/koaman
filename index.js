@@ -145,7 +145,31 @@ Koa.prototype.start = function (port = process.env.PORT, callback) {
         const msg = Buffer.from(JSON.stringify({
           type: 'response', uuid: msgJson.uuid, error: null, data
         }))
-        udpServer.send(msg, 0, msg.length, remote.port, remote.address)
+
+        const Threshold = 5000
+        const Count = msg.length
+        const HFlag = '-#kmut#S#-'
+        const EFlag = '-#kmut#E#-'
+        // 数据报过大，分切回传
+        if (Count > Threshold) {
+          const msgHeader = `times-${new Date().getTime()}${HFlag}`
+          for (let i = 0; i < Math.ceil(Count / Threshold); i++) {
+            const start = Threshold * i
+            const end = start + Threshold - 1
+            let content, newMsg
+            if (end >= Count) {
+              content = msg.toString('utf8', start, Count)
+              newMsg = msgHeader + content + EFlag
+            } else {
+              content = msg.toString('utf8', start, end)
+              newMsg = msgHeader + content
+            }
+            const msgBuf = Buffer.from(newMsg)
+            udpServer.send(msgBuf, 0, msgBuf.length, remote.port, remote.address)
+          }
+        } else {
+          udpServer.send(msg, 0, msg.length, remote.port, remote.address, error => console.error(error))
+        }
       }
 
       // 错误回传
