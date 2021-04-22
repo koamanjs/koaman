@@ -128,8 +128,6 @@ Koa.prototype.start = function (port = process.env.PORT, callback) {
     })
   }
 
-  console.log(this.context.io)
-
   server.listen(port, callback)
 
   // udp 服务监听处理
