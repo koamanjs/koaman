@@ -2,7 +2,7 @@ const path = require('path')
 const fs = require('fs')
 const Koa = require('koa')
 
-Koa.prototype.upload = function (folderPath = process.cwd()) {
+Koa.prototype.upload = function (folderPath = process.cwd(), options = { isRename: true }) {
   const multer = require('@koa/multer')
   const shortid = require('shortid')
 
@@ -13,11 +13,15 @@ Koa.prototype.upload = function (folderPath = process.cwd()) {
           cb(null, folderPath)
         },
         filename (req, file, cb) {
-          const extname = path.extname(file.originalname)
-          const timestamp = Date.now()
-          const id = shortid.generate()
+          if (options.isRename === false) {
+            cb(null, file.originalname)
+          } else {
+            const extname = path.extname(file.originalname)
+            const timestamp = Date.now()
+            const id = shortid.generate()
 
-          cb(null, `${timestamp}${id}${extname}`)
+            cb(null, `${timestamp}${id}${extname}`)
+          }
         }
       })
     })
