@@ -36,7 +36,7 @@
     "mysql2": "^2.2.5",
     "sequelize": "^5.22.0",
     "shortid": "^2.2.14",
-    "socket.io": "^3.0.5"
+    "socket.io": "^4.0.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",

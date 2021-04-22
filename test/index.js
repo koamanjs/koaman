@@ -15,6 +15,7 @@ app
   .model()
   .service()
   .router()
+  .io()
   .extend('util.js')
 
 ;(async () => {

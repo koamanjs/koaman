@@ -121,7 +121,14 @@ Koa.prototype.start = function (port = process.env.PORT, callback) {
   // 启动 app
   const server = require('http').createServer(this.callback())
 
-  io && (this.context.io = require('socket.io')(server))
+  if (io) {
+    const { Server } = require('socket.io')
+    this.context.io = new Server(server, {
+      transports: ['websocket']
+    })
+  }
+
+  console.log(this.context.io)
 
   server.listen(port, callback)
 
