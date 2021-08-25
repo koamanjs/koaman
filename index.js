@@ -124,7 +124,7 @@ Koa.prototype.start = function (port = process.env.PORT, callback) {
   if (io) {
     const { Server } = require('socket.io')
     this.context.io = new Server(server, {
-      transports: ['websocket']
+      transports: ['websocket', 'polling']
     })
   }
 
